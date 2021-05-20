@@ -8,7 +8,7 @@ Before start convert coordinate, you need setup reference point
 
 After you can make convert geodetic to enu
 
-`Geodetic geoPoint = {55, 55};`
+`Geodetic geoPoint = {55, 55};`\
 `Cartesian point = enu->convertGeodetic2Local(geoPoint);`
 
 Or enu to geodetic
