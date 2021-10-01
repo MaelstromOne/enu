@@ -84,6 +84,7 @@ public:
                 result[i] += left[i][j] * right[j];
         return result;
     }
+
 };
 
 using Vector3D = Vector<3,double>;

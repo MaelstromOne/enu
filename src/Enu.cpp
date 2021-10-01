@@ -10,18 +10,18 @@ Enu::Enu(const Geodetic &geodetic)
 
 Cartesian Enu::convertGeodetic2Local(const Geodetic &geodetic) const
 {
-    Cartesian cartesian = convertGeodetic2Cartesian(geodetic);
-    return convertCartesian2Local(cartesian);
+    Cartesian geocentric = convertGeodetic2Geocentric(geodetic);
+    return convertGeocentric2Local(geocentric);
 }
 
 Geodetic Enu::convertLocal2Geodetic(const Cartesian &local) const
 {
-    Cartesian cartesian = convertLocal2Cartesian(local);
-    return convertCartesian2Geodetic(cartesian);
+    Cartesian geocentric = convertLocal2Geocentric(local);
+    return convertGeocentric2Geodetic(geocentric);
 }
 
 void Enu::setReference(const Geodetic &geodetic) {
-    referCartesian = convertGeodetic2Cartesian(geodetic);
+    referGeocentric = convertGeodetic2Geocentric(geodetic);
 }
 
 void Enu::initMatrix(const Geodetic &geodetic)
@@ -42,7 +42,7 @@ void Enu::initMatrix(const Geodetic &geodetic)
     };
 }
 
-Cartesian Enu::convertGeodetic2Cartesian(const Geodetic &geodetic) const {
+Cartesian Enu::convertGeodetic2Geocentric(const Geodetic &geodetic) const {
     double lat = geodetic.lat() * pi / 180;
     double lon = geodetic.lon() * pi / 180;
     double h   = geodetic.alt();
@@ -56,21 +56,21 @@ Cartesian Enu::convertGeodetic2Cartesian(const Geodetic &geodetic) const {
     return Cartesian(x, y, z);
 }
 
-Cartesian Enu::convertCartesian2Local(const Cartesian &cartesian) const
+Cartesian Enu::convertGeocentric2Local(const Cartesian &geocentric) const
 {
-    return matrix * (cartesian - referCartesian);
+    return matrix * (geocentric - referGeocentric);
 }
 
-Cartesian Enu::convertLocal2Cartesian(const Cartesian &local) const
+Cartesian Enu::convertLocal2Geocentric(const Cartesian &local) const
 {
-    return matrixInv * local + referCartesian;
+    return matrixInv * local + referGeocentric;
 }
 
-Geodetic Enu::convertCartesian2Geodetic(const Cartesian &cartesian) const
+Geodetic Enu::convertGeocentric2Geodetic(const Cartesian &geocentric) const
 {
-    double x = cartesian.x();
-    double y = cartesian.y();
-    double z = cartesian.z();
+    double x = geocentric.x();
+    double y = geocentric.y();
+    double z = geocentric.z();
 
 /// link to algorithm
 /// https://www.mathworks.com/help/aeroblks/ecefpositiontolla.html

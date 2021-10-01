@@ -46,13 +46,13 @@ public:
 protected:
     void setReference(const Geodetic &geodetic);
     void initMatrix(const Geodetic &geodetic);
-    Cartesian convertGeodetic2Cartesian(const Geodetic &geodetic) const;
-    Cartesian convertCartesian2Local(const Cartesian &cartesian) const;
-    Cartesian convertLocal2Cartesian(const Cartesian &local) const;
-    Geodetic convertCartesian2Geodetic(const Cartesian &cartesian) const;
+    Cartesian convertGeodetic2Geocentric(const Geodetic &geodetic) const;
+    Cartesian convertGeocentric2Local(const Cartesian &geocentric) const;
+    Cartesian convertLocal2Geocentric(const Cartesian &local) const;
+    Geodetic convertGeocentric2Geodetic(const Cartesian &geocentric) const;
 
 private:
-    Cartesian referCartesian;
+    Cartesian referGeocentric;
     Matrix3x3D matrix;
     Matrix3x3D matrixInv;
 
