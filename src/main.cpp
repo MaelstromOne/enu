@@ -16,16 +16,17 @@ int main(int argc, char *argv[])
         {30, 27, 100},
     };
 
-            std::cout << std::setprecision(17);
+    std::cout << std::setprecision(17);
 
     for(Geodetic &geoPoint : geoPoints) {
         Cartesian point = enu->convertGeodetic2Local(geoPoint);
         Geodetic newGeoPoint = enu->convertLocal2Geodetic(point);
 
-        std::cout << point.x() << " " << point.y() << std::endl;
-        std::cout << geoPoint.lat() << " " << geoPoint.lon() << std::endl;
-        std::cout << newGeoPoint.lat() << " " << newGeoPoint.lon() << std::endl;
+        std::cout << geoPoint.lat() << " " << geoPoint.lon() << " " << geoPoint.alt() << std::endl;
+        std::cout << newGeoPoint.lat() << " " << newGeoPoint.lon() << " " << newGeoPoint.alt() << std::endl;
         std::cout << std::endl;
+        std::cout << point.x() << " " << point.y() << " " << point.z() << std::endl;
+        std::cout << std::endl << std::endl;
     }
 
     delete enu;

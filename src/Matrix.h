@@ -79,9 +79,17 @@ public:
 
     friend Vector<N,T> operator*(const Matrix<N,M,T>& left, const Vector<M,T>& right) {
         Vector<N,T> result;
-        for (std::size_t i = 0; i < result.size(); i++)
-            for (std::size_t j = 0; j < right.size(); j++)
+        for (std::size_t i = 0; i < N; i++)
+            for (std::size_t j = 0; j < M; j++)
                 result[i] += left[i][j] * right[j];
+        return result;
+    }
+
+    Matrix<N, M, T> transpose() {
+        Matrix<N, M, T> result;
+        for (std::size_t i = 0; i < N; i++)
+            for (std::size_t j = 0; j < M; j++)
+                result[i][j] = (*this)[j][i];
         return result;
     }
 

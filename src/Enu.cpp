@@ -35,11 +35,7 @@ void Enu::initMatrix(const Geodetic &geodetic)
         { std::cos(lat)*std::cos(lon),  std::cos(lat)*std::sin(lon), std::sin(lat)}
     };
 
-    matrixInv = {
-        {-std::sin(lon), -std::sin(lat)*std::cos(lon),         std::cos(lat)*std::cos(lon)},
-        { std::cos(lon), -std::sin(lat)*std::sin(lon),         std::cos(lat)*std::sin(lon)},
-        { 0.,             std::cos(lat),                       std::sin(lat)}
-    };
+    matrixInv = matrix.transpose();
 }
 
 Cartesian Enu::convertGeodetic2Geocentric(const Geodetic &geodetic) const {
